@@ -10,7 +10,6 @@ export default function Header() {
   const menuItems = [
     { name: "Inicio", path: "/" },
     { name: "Comprar carro", path: "/comprar-carro" },
-    { name: "Vender carro", path: "/vender-carro" },
     { name: "Alugar carro", path: "/alugar-carro" },
     { name: "Sobre nós", path: "/sobre-nos" },
     { name: "Contactos", path: "/contactos" }
