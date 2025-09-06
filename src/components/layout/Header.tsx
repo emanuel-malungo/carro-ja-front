@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import icon from "../../assets/img/icon.png";
-import { Menu, X, Search, ShoppingBag, User } from "react-feather";
+import { Menu, X, ShoppingBag, User } from "react-feather";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const menuItems = [
+    { name: "Inicio", path: "/" },
+    { name: "Comprar carro", path: "/comprar-carro" },
+    { name: "Vender carro", path: "/vender-carro" },
+    { name: "Alugar carro", path: "/alugar-carro" },
+    { name: "Sobre nós", path: "/sobre-nos" },
+    { name: "Contactos", path: "/contactos" }
+  ];
+
   return (
-    <header className="bg-white sticky top-0 z-50">
+    <header className="bg-white sticky top-0 z-50 shadow-sm">
       <nav className="container mx-auto flex items-center justify-between p-4">
         {/* LOGO */}
-        <a href="#" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <img src={icon} alt="CarroJá" className="w-24 object-contain" />
-        </a>
+        </Link>
 
         {/* MENU DESKTOP */}
         <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
-          {["Inicio", "Comprar carro", "Vender carro", "Alugar carro", "Sobre nós", "Contactos"].map(
-            (item, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  className="hover:text-blue-600 transition-colors duration-200"
-                >
-                  {item}
-                </a>
-              </li>
-            )
-          )}
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <Link
+                to={item.path}
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         {/* AÇÕES */}
@@ -61,18 +69,17 @@ export default function Header() {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <ul className="flex flex-col space-y-4 p-4 text-gray-700 font-medium">
-            {["Inicio", "Comprar carro", "Vender carro", "Alugar carro", "Sobre nós", "Contactos"].map(
-              (item, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="block hover:text-blue-600 transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              )
-            )}
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                <Link
+                  to={item.path}
+                  className="block hover:text-blue-600 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       )}
